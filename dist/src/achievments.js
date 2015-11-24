@@ -18,7 +18,7 @@ var Achievment = (function () {
         }
     };
     Achievment.prototype.award = function (achiever, token) {
-        achiever.achievments[this.resolveId(token)] = achiever.achievments[this.resolveId(token)] + 1;
+        achiever.achievments[this.resolveId(token)] = "awarded";
     };
     Achievment.prototype.awardIfNotAwarded = function (achiever, token) {
         if (!achiever.achievments[this.resolveId(token)]) {

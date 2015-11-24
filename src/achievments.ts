@@ -17,7 +17,7 @@ export class Achievment{
 	}
 	
 	award(achiever:Achiever,token?:string){
-		achiever.achievments[this.resolveId(token)] = achiever.achievments[this.resolveId(token)]  + 1;
+		achiever.achievments[this.resolveId(token)] = "awarded";
 	}
 	
 	awardIfNotAwarded(achiever:Achiever,token?:string):boolean{
