@@ -104,6 +104,16 @@ export class AchievmentManager{
 		return awardedAchievments;
 	}
 	
+	bumpMetric(achiever:Achiever,metricId:string,value:any,token?:string):Achievment[]{
+		var metric = this.getMetric(achiever,metricId,token);
+		var value = metric.getValue();
+		if(!value){
+			value = 0;
+		}
+		value = value + 1;
+		return this.updateMetric(achiever,metricId,value,token);
+	}
+	
 	private registerWatch(metricId: string,achievment : Achievment){
 		if(!this.watches[metricId]){
 			this.watches[metricId] = [];

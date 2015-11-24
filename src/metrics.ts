@@ -59,3 +59,5 @@ export class Metric implements SimpleMetric{
 
 
 export var commitCountMetric : SimpleMetric = {id:"commit.count"}
+export var pushCountMetric : SimpleMetric = {id:"push.count"}
+export var forcePushCountMetric : SimpleMetric = {id:"force.push.count"}

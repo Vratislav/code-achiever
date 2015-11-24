@@ -2,6 +2,7 @@ import {Repository} from './repository'
 import {Achiever} from './achiever'
 
 
+
 export interface PlayerData{
 	id : string;
 	githubName : string;
