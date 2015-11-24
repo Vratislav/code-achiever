@@ -9,7 +9,7 @@
     "test": "npm run clean && tsc && jasmine",
     "clean": "node ./tooling/clean.js",
     "start": "npm run clean && tsc && node build/index.js",
-    "dist": "npm run clean && tsc && cp -r ./build ./dist"
+    "dist": "npm run clean && tsc && node ./tooling/copy.js"
   },
   "repository": {
     "type": "git",
