@@ -21,20 +21,12 @@ if (config.showVersion) {
     console.log("v" + pjson.version);
     process.exit(0);
 }
-var vkj = {
-    id: "vkj",
-    githubName: "Vratislav",
-    slackName: "Vratislav",
-    achievments: {},
-    metrics: {}
-};
 var repo = new repository_1.Repository(config.redisUrl);
-repo.createPlayerIfDoesNotExtist(vkj);
 var achievmentManager = new Achievments.AchievmentManager();
 achievmentManager.registerSimpleMetric(Metrics.commitCountMetric);
 achievmentManager.registerAchievment(new Achievments.FirstCommitAchievment());
 var announcer = new announcer_1.Announcer(config);
-var server = new server_1.Server(config);
+var server = new server_1.Server(config, repo, achievmentManager, announcer);
 server.start();
 // repo.getPlayerByMatcher((p)=>{
 // 	//console.log("Matching",p)

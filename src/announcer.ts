@@ -17,7 +17,7 @@ export class Announcer{
 		axios.post(this.config.slackWebhookUrl,{
 			"fallback":achievment.name,
 			"username" : "Achievements",
-			"channel":"#code-achiever",
+			"channel":"@"+achiever.name,
 			"icon_url" : "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f3c6.svg/256px-Twemoji_1f3c6.svg.png",
 			"attachments": [
 				{

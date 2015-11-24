@@ -56,6 +56,19 @@ var Repository = (function () {
             return null;
         });
     };
+    Repository.prototype.getPlayers = function () {
+        var _this = this;
+        return this.clientAsync.hgetallAsync(playersHashKey).then(function (playersHash) {
+            console.log(playersHash);
+            var players = _.values(playersHash);
+            var pls = [];
+            for (var i = 0; i < players.length; i++) {
+                var player = new player_1.Player(players[i], _this);
+                pls.push(player);
+            }
+            return pls;
+        });
+    };
     Repository.prototype.savePlayer = function (player) {
         return this.clientAsync.hsetAsync(playersHashKey, player.data.id, JSON.stringify(player.data)).then(function () {
             console.log("Player", player.data.id, "saved");

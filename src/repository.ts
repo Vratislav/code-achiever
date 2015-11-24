@@ -64,6 +64,19 @@ export class Repository{
 		});
 	}
 	
+	getPlayers():Promise<Player[]>{
+		return this.clientAsync.hgetallAsync(playersHashKey).then((playersHash)=>{
+			console.log(playersHash)
+			var players : PlayerData[] = _.values(playersHash);
+			var pls : Player[] = [];
+			for(var i = 0; i< players.length; i++){
+				var player = new Player(players[i],this);
+				pls.push(player);
+			}
+			return pls; 
+		});
+	}
+	
 	savePlayer(player:Player):Promise<Player>{
 		return this.clientAsync.hsetAsync(playersHashKey,player.data.id,JSON.stringify(player.data)).then(()=>{
 			console.log("Player",player.data.id,"saved");

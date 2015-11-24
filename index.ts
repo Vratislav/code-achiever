@@ -27,23 +27,13 @@ if(config.showVersion){
 	process.exit(0);
 }
 
-var vkj : PlayerData = { 
-	id : "vkj",
-	githubName : "Vratislav",
-	slackName : "Vratislav",
-	achievments : {},
-	metrics : {}
-}
-
-
 var repo = new Repository(config.redisUrl);
-repo.createPlayerIfDoesNotExtist(vkj);
 var achievmentManager = new Achievments.AchievmentManager();
 achievmentManager.registerSimpleMetric(Metrics.commitCountMetric);
 achievmentManager.registerAchievment(new Achievments.FirstCommitAchievment());
 var announcer = new Announcer(config);
 
-var server = new Server(config);
+var server = new Server(config,repo,achievmentManager,announcer);
 server.start();
 
 
