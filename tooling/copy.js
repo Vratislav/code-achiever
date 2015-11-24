@@ -1,2 +1,2 @@
 require('shelljs/global');
-cp('-r', './build', './dist');
+cp('-r', './build/*', './dist');
