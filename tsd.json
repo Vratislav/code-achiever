@@ -1,0 +1,57 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "express/express.d.ts": {
+      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "serve-static/serve-static.d.ts": {
+      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "node/node.d.ts": {
+      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+    },
+    "mime/mime.d.ts": {
+      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "colors/colors.d.ts": {
+      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "glob/glob.d.ts": {
+      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "minimatch/minimatch.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    },
+    "underscore/underscore.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    },
+    "node-uuid/node-uuid-base.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    },
+    "node-uuid/node-uuid.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    },
+    "node-uuid/node-uuid-cjs.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    },
+    "yargs/yargs.d.ts": {
+      "commit": "af49a87da21d81194a242bb868efdffd5917b7c5"
+    },
+    "redis/redis.d.ts": {
+      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+    },
+    "shelljs/shelljs.d.ts": {
+      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+    },
+    "bluebird/bluebird.d.ts": {
+      "commit": "fa04c80f4a889613b96cb4f283848c61a9f64233"
+    }
+  }
+}

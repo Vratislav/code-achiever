@@ -1,0 +1,46 @@
+{
+  "name": "judge",
+  "version": "0.3.2",
+  "description": "SDK Integration Testing server",
+  "main": "./dist/index.js",
+  "bin": "./bin/judge",
+  "preferGlobal": true,
+  "scripts": {
+    "test": "npm run clean && tsc && jasmine",
+    "clean": "node ./tooling/clean.js",
+    "start": "npm run clean && tsc && node build/index.js",
+    "dist": "npm run clean && tsc && cp -r ./build ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Ceskasporiteln/judge.git"
+  },
+  "author": "Vratislav Kalenda",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/Ceskasporiteln/judge/issues"
+  },
+  "homepage": "https://github.com/Ceskasporiteln/judge#readme",
+  "devDependencies": {
+    "jasmine": "^2.3.2",
+    "shelljs": "^0.5.3",
+    "typescript": "^1.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.7.0",
+    "bluebird": "^3.0.5",
+    "body-parser": "^1.14.1",
+    "colors": "^1.1.2",
+    "crypto": "0.0.3",
+    "express": "^4.13.3",
+    "glob": "^6.0.1",
+    "minimatch": "^3.0.0",
+    "node-uuid": "^1.4.7",
+    "redis": "^2.3.1",
+    "slack-node": "^0.1.3",
+    "source-map-support": "^0.3.3",
+    "underscore": "^1.8.3",
+    "url": "^0.11.0",
+    "yargs": "^3.30.0"
+  }
+}
