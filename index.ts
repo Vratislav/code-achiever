@@ -27,7 +27,7 @@ if(config.showVersion){
 	process.exit(0);
 }
 
-var vkj : PlayerData = {
+var vkj : PlayerData = { 
 	id : "vkj",
 	githubName : "Vratislav",
 	slackName : "Vratislav",
