@@ -13,4 +13,3 @@
 /// <reference path="yargs/yargs.d.ts" />
 /// <reference path="redis/redis.d.ts" />
 /// <reference path="shelljs/shelljs.d.ts" />
-/// <reference path="bluebird/bluebird.d.ts" />

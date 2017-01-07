@@ -1,19 +1,20 @@
-/// <reference path="../node_modules/axios/axios" />
 
 import {Config} from './config'
 import {Achiever} from './achiever'
 import {Achievment} from './achievments'
 import axios = require('axios')
+
 export class Announcer{
 	config : Config
 	constructor(config : Config){
 		this.config = config;
-		
+
 	}
-	
-	
+
+
 	announceAchievment(achiever:Achiever,achievment:Achievment,token?:string){
 		console.log('Anonnouncing achievment',achievment.id)
+
 		axios.post(this.config.slackWebhookUrl,{
 			"fallback":achievment.name,
 			"username" : "Achievements",
@@ -31,7 +32,7 @@ export class Announcer{
 			console.error(err);
 		});
 	}
-	
-	
-	
+
+
+
 }

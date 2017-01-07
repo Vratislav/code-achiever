@@ -1,8 +1,9 @@
 import redis = require('redis')
 import bluebird = require('bluebird')
+
 import {Player,PlayerData} from './player'
 import _ = require('underscore')
-bluebird.promisifyAll((<any>redis).RedisClient.prototype);
+(bluebird as any).promisifyAll((<any>redis).RedisClient.prototype);
 var playersHashKey = "CA.Players";
 export class Repository{
 	client : redis.RedisClient;
@@ -12,7 +13,7 @@ export class Repository{
 		this.clientAsync = this.client;
 		this.client.on("connect",()=>{
 			console.log("connected to redis server");
-			
+
 			var data = JSON.stringify({"integerVal":123456,"nested": {"Nested shit":[1,2,"car"]}})
 			console.log("Storing testing data");
 			this.client.set("test_data",data,()=>{
@@ -21,16 +22,16 @@ export class Repository{
 					console.log("Retrieved:",dat);
 				});
 			})
-			
+
 		});
-		
-		
-		
+
+
+
 	}
-	
+
 	createPlayerIfDoesNotExtist(playerData:PlayerData):Promise<Player>{
-		
-		
+
+
 		return this.clientAsync.hgetAsync(playersHashKey,playerData.id).then((fetchedP:PlayerData)=>{
 			if(!fetchedP){
 				console.log("Player does not exist creating",playerData);
@@ -43,13 +44,13 @@ export class Repository{
 			}
 		});
 	}
-	
+
 	getPlayerById(id:string):Promise<Player>{
 		return this.clientAsync.hgetAsync(playersHashKey,id).then((pData)=>{
 			return new Player(pData,this)
 		});
 	}
-	
+
 	getPlayerByMatcher(matcher:(playerData:Player)=>boolean):Promise<Player>{
 		return this.clientAsync.hgetallAsync(playersHashKey).then((playersHash)=>{
 			console.log(playersHash)
@@ -60,10 +61,10 @@ export class Repository{
 					return player;
 				}
 			}
-			return null; 
+			return null;
 		});
 	}
-	
+
 	getPlayers():Promise<Player[]>{
 		return this.clientAsync.hgetallAsync(playersHashKey).then((playersHash)=>{
 			console.log(playersHash)
@@ -73,16 +74,16 @@ export class Repository{
 				var player = new Player(players[i],this);
 				pls.push(player);
 			}
-			return pls; 
+			return pls;
 		});
 	}
-	
+
 	savePlayer(player:Player):Promise<Player>{
 		return this.clientAsync.hsetAsync(playersHashKey,player.data.id,JSON.stringify(player.data)).then(()=>{
 			console.log("Player",player.data.id,"saved");
 			return player;
 		})
 	}
-	
-	
+
+
 }

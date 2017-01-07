@@ -1,13 +1,19 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"target": "ES5",
-		"sourceMap": true,
-		"outDir": "build"
-		
-	},
+    "compilerOptions": {
+        "outDir": "./build",
+        "target": "es6",
+        "module": "commonjs",
+        //"rootDir": "src",
+        "rootDirs" : ["src","spec"],
+        "declaration": false,
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/rx",
+            "./node_modules/axios/axios.d.ts"
+        ]
+    },
     "exclude": [
         "node_modules"
     ]
-	
+
 }
