@@ -72,6 +72,9 @@ export class GithubHandler{
 				console.log(player.debugInfo);
 				console.log(`Achievements to be awarded:`);
 				console.log(achievements);
+				achievements.forEach((achievment)=>{
+					this.announcer.announceAchievment(player,achievment);
+				});
 			},(error) => {
 				console.log(`Got error: ${error}`);
 				if(error.stack){

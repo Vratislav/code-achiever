@@ -1,17 +1,19 @@
+"use strict";
 require('source-map-support').install();
-var cli_1 = require('./src/cli');
-var _ = require('underscore');
-var repository_1 = require('./src/repository');
-var Metrics = require('./src/metrics');
-var Achievments = require('./src/achievments');
-var announcer_1 = require('./src/announcer');
-var server_1 = require('./src/server');
+const cli_1 = require("./src/cli");
+const _ = require("underscore");
+const repository_1 = require("./src/repository");
+const Metrics = require("./src/metrics");
+const Achievments = require("./src/achievments");
+const announcer_1 = require("./src/announcer");
+const server_1 = require("./src/server");
 var defaultConfig = {
     port: 3001,
     logLevel: "INFO",
     showVersion: false,
     redisUrl: process.env["REDIS_URL"],
-    slackWebhookUrl: process.env["SLACK_WEBHOOK_URL"]
+    slackWebhookUrl: process.env["SLACK_WEBHOOK_URL"],
+    adminToken: process.env["ADMIN_TOKEN"]
 };
 var cli = new cli_1.CLI();
 var configFromCli = cli.getConfig();
@@ -23,8 +25,8 @@ if (config.showVersion) {
 }
 var repo = new repository_1.Repository(config.redisUrl);
 var achievmentManager = new Achievments.AchievmentManager();
-achievmentManager.registerSimpleMetric(Metrics.commitCountMetric);
-achievmentManager.registerAchievment(new Achievments.FirstCommitAchievment());
+Metrics.allMetrics.forEach((m) => achievmentManager.registerSimpleMetric(m));
+Achievments.allAchievements.forEach((a => achievmentManager.registerAchievment(a)));
 var announcer = new announcer_1.Announcer(config);
 var server = new server_1.Server(config, repo, achievmentManager, announcer);
 server.start();

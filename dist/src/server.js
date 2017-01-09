@@ -1,9 +1,11 @@
-var express = require('express');
-var Metrics = require('./metrics');
+"use strict";
+const express = require("express");
+const admin_1 = require("./adminApi/admin");
 var bodyParser = require('body-parser');
 var colors = require('colors/safe');
-var Server = (function () {
-    function Server(config, repository, achievementsManager, announcer) {
+const github_handler_1 = require("./github-handler");
+class Server {
+    constructor(config, repository, achievementsManager, announcer) {
         this.config = config;
         this.repo = repository;
         this.app = express();
@@ -12,48 +14,41 @@ var Server = (function () {
         this.achievementsManager = achievementsManager;
         this.announcer = announcer;
     }
-    Server.prototype.start = function () {
+    start() {
         this.listener = this.app.listen(this.config.port);
+        // this.repo.players.subscribe((players) => {
+        // 	console.log(players);
+        // })
         console.log(colors.green("CodeAchiever is running on port " + this.config.port));
-    };
-    Server.prototype.stop = function () {
+    }
+    stop() {
         if (this.listener) {
             this.listener.close();
         }
         console.log("Code achiever server stopped.");
-    };
-    Server.prototype.configureMiddleware = function () {
+    }
+    configureMiddleware() {
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
-    };
-    Server.prototype.configureRoutes = function () {
-        var _this = this;
+    }
+    configureRoutes() {
         var app = this.app;
-        app.post('/github/hook', function (req, resp) {
-            console.log("Recieved on /github/hook:");
+        admin_1.mountAdminRoutes({
+            app: app,
+            repostirory: this.repo,
+            adminToken: this.config.adminToken
+        });
+        app.post('/github/hook', (req, resp) => {
+            //console.log("Recieved on /github/hook:");
             if (req.header("X-GitHub-Event") == "push") {
                 var pushEvent = req.body;
-                _this.repo.getPlayerByMatcher(function (p) {
-                    return p.data.githubName == pushEvent.sender.login;
-                }).then(function (p) {
-                    if (p) {
-                        var value = _this.achievementsManager.getMetric(p, Metrics.commitCountMetric.id).getValue();
-                        if (!value) {
-                            value = 0;
-                        }
-                        var achievements = _this.achievementsManager.updateMetric(p, Metrics.commitCountMetric.id, value + 1);
-                        achievements.forEach(function (achievment) {
-                            _this.announcer.announceAchievment(p, achievment);
-                        });
-                        p.save();
-                    }
-                });
+                const handler = new github_handler_1.GithubHandler(this.repo, this.achievementsManager, this.announcer);
+                handler.handle(req, req.header("X-GitHub-Event"));
             }
-            console.log(req.body);
+            //console.log(req.body);
             resp.sendStatus(200);
         });
-    };
-    return Server;
-})();
+    }
+}
 exports.Server = Server;
 //# sourceMappingURL=server.js.map

@@ -1,7 +1,8 @@
+"use strict";
 /// <reference path="../typings/yargs/yargs.d.ts" />
-var yargs = require('yargs');
-var CLI = (function () {
-    function CLI() {
+const yargs = require("yargs");
+class CLI {
+    constructor() {
         this.yargs = yargs.options({
             'f': {
                 alias: 'file',
@@ -29,7 +30,7 @@ var CLI = (function () {
         // 	process.exit(0);
         // }
     }
-    CLI.prototype.getConfig = function () {
+    getConfig() {
         var config = {};
         if (this.params.p) {
             config.port = this.params.p;
@@ -38,8 +39,7 @@ var CLI = (function () {
             config.showVersion = true;
         }
         return config;
-    };
-    return CLI;
-})();
+    }
+}
 exports.CLI = CLI;
 //# sourceMappingURL=cli.js.map

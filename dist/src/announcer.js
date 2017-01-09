@@ -1,15 +1,23 @@
-/// <reference path="../node_modules/axios/axios" />
-var axios = require('axios');
-var Announcer = (function () {
-    function Announcer(config) {
+"use strict";
+const axios = require("axios");
+class Announcer {
+    constructor(config) {
         this.config = config;
     }
-    Announcer.prototype.announceAchievment = function (achiever, achievment, token) {
+    announceAchievment(achiever, achievment, token) {
+        if (!this.config.slackWebhookUrl) {
+            console.error("Cannot announce achievement. SLACK_WEBHOOK_URL ENV variable is not set!");
+            return;
+        }
+        if (!achiever.data.slackName) {
+            console.error(`Cannot announce achievement for ${achiever.name}! No slackName defined!`);
+            return;
+        }
         console.log('Anonnouncing achievment', achievment.id);
         axios.post(this.config.slackWebhookUrl, {
-            "fallback": achievment.name,
+            "fallback": achiever.data.slackName,
             "username": "Achievements",
-            "channel": "@" + achiever.name,
+            "channel": "@" + achiever.data.slackName,
             "icon_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f3c6.svg/256px-Twemoji_1f3c6.svg.png",
             "attachments": [
                 {
@@ -19,11 +27,10 @@ var Announcer = (function () {
                     "image_url": achievment.imageUrl
                 }
             ]
-        }).catch(function (err) {
+        }).catch((err) => {
             console.error(err);
         });
-    };
-    return Announcer;
-})();
+    }
+}
 exports.Announcer = Announcer;
 //# sourceMappingURL=announcer.js.map

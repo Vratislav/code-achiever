@@ -31,7 +31,7 @@ if(config.showVersion){
 var repo = new Repository(config.redisUrl);
 var achievmentManager = new Achievments.AchievmentManager();
 Metrics.allMetrics.forEach((m) => achievmentManager.registerSimpleMetric(m));
-achievmentManager.registerAchievment(new Achievments.FirstCommitAchievment());
+Achievments.allAchievements.forEach((a => achievmentManager.registerAchievment(a)));
 var announcer = new Announcer(config);
 
 var server = new Server(config,repo,achievmentManager,announcer);

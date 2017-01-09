@@ -1,49 +1,40 @@
-var Player = (function () {
-    function Player(data, repository) {
+"use strict";
+const rxjs_1 = require("rxjs");
+class Player {
+    constructor(data, repository) {
         if (typeof (data) == "string") {
             data = JSON.parse(data);
         }
         this.data = data;
         this.repo = repository;
     }
-    Object.defineProperty(Player.prototype, "name", {
-        get: function () {
-            if (this.data.slackName) {
-                return this.data.slackName;
-            }
-            if (this.data.githubName) {
-                return this.data.githubName;
-            }
-            return this.data.id;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Player.prototype, "type", {
-        get: function () {
-            return "PLAYER";
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Player.prototype, "metrics", {
-        get: function () {
-            return this.data.metrics;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Player.prototype, "achievments", {
-        get: function () {
-            return this.data.achievments;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Player.prototype.save = function () {
+    get name() {
+        if (this.data.slackName) {
+            return this.data.slackName;
+        }
+        if (this.data.githubName) {
+            return this.data.githubName;
+        }
+        return this.data.id;
+    }
+    get type() {
+        return "PLAYER";
+    }
+    get metrics() {
+        return this.data.metrics;
+    }
+    get achievments() {
+        return this.data.achievments;
+    }
+    save() {
         return this.repo.savePlayer(this);
-    };
-    return Player;
-})();
+    }
+    obsSave() {
+        return rxjs_1.Observable.fromPromise(this.save);
+    }
+    get debugInfo() {
+        return `id: ${this.data.id} githubName: ${this.data.githubName} slackName: ${this.data.slackName}`;
+    }
+}
 exports.Player = Player;
 //# sourceMappingURL=player.js.map

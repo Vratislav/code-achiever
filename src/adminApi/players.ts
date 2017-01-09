@@ -39,5 +39,20 @@ export function mountPlayerRoutes(context : AdminContext){
             })
         });
 
+    context.app.post('/api/v1/players/:playerId/reset',
+        verifyAdminTokenOrDie(context.adminToken),
+        (request, response : express.Response) => {
+            const playerId = request.params.playerId
+            Rx.Observable.fromPromise(context.repostirory.getPlayerById(playerId))
+            .flatMap((player)=> {
+                    var newData = request.body as PlayerData
+                    player.data.achievments = {};
+                    player.data.metrics = {};
+                    return Rx.Observable.fromPromise(player.save())
+            }).map((p) => p.data).subscribe((playerData)=>{
+                response.json(200,playerData);
+            })
+        });
+
 }
 //{app, repository} : {app : express.Express, repository : Repository}

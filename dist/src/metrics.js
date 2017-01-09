@@ -1,33 +1,31 @@
-var ResolvedMetric = (function () {
-    function ResolvedMetric(achiever, metric, token) {
+"use strict";
+class ResolvedMetric {
+    constructor(achiever, metric, token) {
         this.achiever = achiever;
         this.metric = metric;
         this.token = token;
     }
-    ResolvedMetric.prototype.getValue = function () {
+    getValue() {
         return this.metric.getValue(this.achiever, this.metric.resolveId(this.token));
-    };
-    return ResolvedMetric;
-})();
-exports.ResolvedMetric = ResolvedMetric;
-var Metric = (function () {
-    function Metric() {
     }
-    Metric.resolveId = function (id, token) {
+}
+exports.ResolvedMetric = ResolvedMetric;
+class Metric {
+    static resolveId(id, token) {
         if (token) {
             return token + "::" + id;
         }
         else {
             return id;
         }
-    };
-    Metric.prototype.resolveId = function (token) {
+    }
+    resolveId(token) {
         return Metric.resolveId(this.id, token);
-    };
-    Metric.prototype.update = function (achiever, resolvedMetricId, value) {
+    }
+    update(achiever, resolvedMetricId, value) {
         achiever.metrics[resolvedMetricId] = value;
-    };
-    Metric.prototype.getValue = function (achiever, resolvedMetricId) {
+    }
+    getValue(achiever, resolvedMetricId) {
         //console.log('Looking at',resolvedMetricId,'for value')
         var val = achiever.metrics[resolvedMetricId];
         //console.log('Value',val);
@@ -35,9 +33,15 @@ var Metric = (function () {
             return null;
         }
         return val;
-    };
-    return Metric;
-})();
+    }
+}
 exports.Metric = Metric;
 exports.commitCountMetric = { id: "commit.count" };
+exports.pushCountMetric = { id: "push.count" };
+exports.forcePushCountMetric = { id: "force.push.count" };
+exports.allMetrics = [
+    exports.commitCountMetric,
+    exports.pushCountMetric,
+    exports.forcePushCountMetric
+];
 //# sourceMappingURL=metrics.js.map

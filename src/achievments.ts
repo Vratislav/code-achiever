@@ -148,3 +148,65 @@ export class FirstCommitAchievment extends GreaterThanAchievment {
 		this.setup();
 	}
 }
+
+export class Commit10Achievment extends GreaterThanAchievment {
+	constructor(){
+		super();
+		this.id = "commit.count.10";
+		this.name = "Yes, I do commit!"
+		this.description = "Push 10 commits into the repository"
+		this.metricId = Metrics.commitCountMetric.id;
+		this.imageUrl = "http://cameronmcefee.com/img/work/the-octocat/codercat.jpg"
+		this.greaterThan = 10;
+		this.setup();
+	}
+}
+
+export class Commit50Achievment extends GreaterThanAchievment {
+	constructor(){
+		super();
+		this.id = "commit.count.50";
+		this.name = "But of course Yes! I do quite enjoy commiting!"
+		this.description = "Push 50 commits into the repository"
+		this.metricId = Metrics.commitCountMetric.id;
+		this.imageUrl = "https://octodex.github.com/images/founding-father.jpg"
+		this.greaterThan = 50;
+		this.setup();
+	}
+}
+
+export class Commit100Achievment extends GreaterThanAchievment {
+	constructor(){
+		super();
+		this.id = "commit.count.100";
+		this.name = "Do you even commit, bro?"
+		this.description = "Whoa! Push 100 commits into the repository!"
+		this.metricId = Metrics.commitCountMetric.id;
+		this.imageUrl = "https://octodex.github.com/images/steroidtocat.png"
+		this.greaterThan = 100;
+		this.setup();
+	}
+}
+
+
+export class ForcePushAchievment extends GreaterThanAchievment {
+	constructor(){
+		super();
+		this.id = "force.push";
+		this.name = "Say hello to Mr. Force Push!"
+		this.description = "You just force pushed into the repository!"
+		this.metricId = Metrics.forcePushCountMetric.id;
+		this.imageUrl = "http://www.mememaker.net/static/images/memes/3914636.jpg"
+		this.greaterThan = 0;
+		this.setup();
+	}
+}
+
+
+export const allAchievements : Achievment[] = [
+	new FirstCommitAchievment(),
+	new Commit10Achievment(),
+	new Commit50Achievment(),
+	new Commit100Achievment(),
+	new ForcePushAchievment()
+]
