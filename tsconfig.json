@@ -10,7 +10,8 @@
             "./node_modules/@types",
             "./node_modules/rx",
             "./node_modules/axios/axios.d.ts"
-        ]
+        ],
+        "sourceMap": true
     },
     "exclude": [
         "node_modules"

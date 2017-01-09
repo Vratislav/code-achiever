@@ -45,6 +45,10 @@ class GreaterThanAchievment extends Achievment {
 
 	constructor(){
 		super();
+
+	}
+
+	protected setup(){
 		this.metricWatches.push(this.metricId);
 	}
 
@@ -72,7 +76,7 @@ export class AchievmentManager{
 		achievment.metricWatches.forEach((metricId)=>{
 			this.registerWatch(metricId,achievment);
 		});
-		console.log("Registered achievment:",achievment.id)
+		console.log("Registered achievment:",achievment.id , "metrics watches:", achievment.metricWatches.join(','))
 	}
 
 	registerSimpleMetric(simpleMetric : Metrics.SimpleMetric){
@@ -82,6 +86,7 @@ export class AchievmentManager{
 	}
 
 	getMetric(achiever:Achiever,metricId:string,token?:string) : Metrics.ResolvedMetric{
+		console.log(`Getting metric ${metricId}`);
 		return new Metrics.ResolvedMetric(achiever,this.metrics[metricId],token);
 	}
 
@@ -91,7 +96,7 @@ export class AchievmentManager{
 		var metricObj = this.metrics[metricId];
 		var resolvedMetricId = metricObj.resolveId(token);
 		metricObj.update(achiever,resolvedMetricId,value);
-		var affectedAchievments : Achievment[] = this.watches[metricId];
+		var affectedAchievments : Achievment[] = this.watches[metricId] || [];
 		console.log("Affected achievments",affectedAchievments);
 		for (var index = 0; index < affectedAchievments.length; index++) {
 			var achievment = affectedAchievments[index];
@@ -109,7 +114,7 @@ export class AchievmentManager{
 		return awardedAchievments;
 	}
 
-	bumpMetric(achiever:Achiever,metricId:string,value:any,token?:string):Achievment[]{
+	bumpMetric(achiever:Achiever,metricId:string,token?:string):Achievment[]{
 		var metric = this.getMetric(achiever,metricId,token);
 		var value = metric.getValue();
 		if(!value){
@@ -140,6 +145,6 @@ export class FirstCommitAchievment extends GreaterThanAchievment {
 		this.metricId = Metrics.commitCountMetric.id;
 		this.imageUrl = "https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1293753715"
 		this.greaterThan = 0;
+		this.setup();
 	}
-
 }

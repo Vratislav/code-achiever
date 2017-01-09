@@ -1,16 +1,53 @@
 import redis = require('redis')
 import bluebird = require('bluebird')
-
+import Rx = require('rxjs')
+import {Observable} from 'rxjs'
+import {createObservable} from './utils'
 import {Player,PlayerData} from './player'
 import _ = require('underscore')
 (bluebird as any).promisifyAll((<any>redis).RedisClient.prototype);
-var playersHashKey = "CA.Players";
+const playersHashKey = "CA.Players";
+const githubEventsHashKey = "CA.GitHub.Events"
+
+
+
+
+
+
+
 export class Repository{
 	client : redis.RedisClient;
 	clientAsync : any;
+
+	clientObs : Observable<redis.RedisClient>;
+
 	constructor(redisUrl : string){
+		this.clientObs = createObservable((observer : Rx.Observer<redis.RedisClient>)=>{
+			const client = redis.createClient(redisUrl);
+			client.on("connect",()=>{
+				console.log("connected to redis server");
+				var data = JSON.stringify({"integerVal":123456,"nested": {"Nested shit":[1,2,"car"]}})
+				console.log("Storing testing data");
+				client.set("test_data",data,()=>{
+					console.log("saved")
+					client.get("test_data",(err,dat)=>{
+						console.log("Retrieved:",dat);
+						observer.next(client);
+					});
+				});
+			});
+		}).publishReplay(1);
+
+		(this.clientObs as any).connect();
+
+
+
+
 		this.client = redis.createClient(redisUrl);
 		this.clientAsync = this.client;
+
+
+
 		this.client.on("connect",()=>{
 			console.log("connected to redis server");
 
@@ -24,14 +61,11 @@ export class Repository{
 			})
 
 		});
-
-
-
 	}
 
+
+
 	createPlayerIfDoesNotExtist(playerData:PlayerData):Promise<Player>{
-
-
 		return this.clientAsync.hgetAsync(playersHashKey,playerData.id).then((fetchedP:PlayerData)=>{
 			if(!fetchedP){
 				console.log("Player does not exist creating",playerData);
@@ -67,7 +101,7 @@ export class Repository{
 
 	getPlayers():Promise<Player[]>{
 		return this.clientAsync.hgetallAsync(playersHashKey).then((playersHash)=>{
-			console.log(playersHash)
+			//console.log(playersHash)
 			var players : PlayerData[] = _.values(playersHash);
 			var pls : Player[] = [];
 			for(var i = 0; i< players.length; i++){
@@ -75,6 +109,46 @@ export class Repository{
 				pls.push(player);
 			}
 			return pls;
+		});
+	}
+
+	get players() : Observable<Player[]> {
+		return this.clientObs
+		.flatMap((c : any) => Rx.Observable.fromPromise(c.hgetallAsync(playersHashKey)))
+		.do(c => console.log(c))
+		.map(playerHash => _.values(playerHash))
+		.map(playerDatas => playerDatas.map(playerData => new Player(playerData as any,this)))
+		.take(1)
+	}
+
+	get githubEvents() : Observable<any[]> {
+		console.log("github events requested");
+		return this.clientObs
+		.flatMap((c : any) => {
+			console.log("Returning cGetAsync");
+			return Rx.Observable.fromPromise(c.lrangeAsync(githubEventsHashKey,0,30))
+				.map((eventJsonStrings : string[])=>{
+					return eventJsonStrings.map((s) => JSON.parse(s));
+				});
+		})
+		//.map( l => l || [])
+		.take(1)
+	}
+
+	storeGithubEvent(event : any) : Observable<any> {
+		return this.clientObs.map(c => {
+			c.lpush(githubEventsHashKey,JSON.stringify(event));
+			c.ltrim(githubEventsHashKey,0,30);
+			return event;
+		});
+	}
+
+
+
+	savePlayerObs = (player : Player) : Observable<Player> => {
+		return this.clientObs.map(c => {
+			c.hset(playersHashKey,player.data.id, JSON.stringify(player.data));
+			return player;
 		});
 	}
 
@@ -87,3 +161,5 @@ export class Repository{
 
 
 }
+
+

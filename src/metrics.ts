@@ -9,7 +9,7 @@ export class ResolvedMetric{
 		this.metric = metric;
 		this.token = token;
 	}
-	
+
 	getValue():any{
 		return this.metric.getValue(this.achiever,this.metric.resolveId(this.token));
 	}
@@ -28,7 +28,7 @@ export interface SimpleMetric{
 export class Metric implements SimpleMetric{
 	id : string;
 
-	
+
 	static resolveId(id:string,token?:string) : string{
 		if(token){
 			return token + "::" + id;
@@ -36,15 +36,15 @@ export class Metric implements SimpleMetric{
 			return id;
 		}
 	}
-	
+
 	resolveId(token?:string) : string{
 		return Metric.resolveId(this.id,token);
 	}
-	
+
 	update(achiever : Achiever, resolvedMetricId : string,  value:any){
 		achiever.metrics[resolvedMetricId] = value;
 	}
-	
+
 	getValue(achiever : Achiever, resolvedMetricId : string):any{
 		//console.log('Looking at',resolvedMetricId,'for value')
 		var val = achiever.metrics[resolvedMetricId];
@@ -61,3 +61,11 @@ export class Metric implements SimpleMetric{
 export var commitCountMetric : SimpleMetric = {id:"commit.count"}
 export var pushCountMetric : SimpleMetric = {id:"push.count"}
 export var forcePushCountMetric : SimpleMetric = {id:"force.push.count"}
+
+
+
+export var allMetrics = [
+	commitCountMetric,
+	pushCountMetric,
+	forcePushCountMetric
+]

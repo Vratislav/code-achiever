@@ -13,7 +13,8 @@ var defaultConfig : Config = {
 	logLevel : "INFO",
 	showVersion : false,
 	redisUrl : process.env["REDIS_URL"],
-	slackWebhookUrl : process.env["SLACK_WEBHOOK_URL"]
+	slackWebhookUrl : process.env["SLACK_WEBHOOK_URL"],
+	adminToken : process.env["ADMIN_TOKEN"]
 }
 
 var cli = new CLI();
@@ -29,7 +30,7 @@ if(config.showVersion){
 
 var repo = new Repository(config.redisUrl);
 var achievmentManager = new Achievments.AchievmentManager();
-achievmentManager.registerSimpleMetric(Metrics.commitCountMetric);
+Metrics.allMetrics.forEach((m) => achievmentManager.registerSimpleMetric(m));
 achievmentManager.registerAchievment(new Achievments.FirstCommitAchievment());
 var announcer = new Announcer(config);
 
@@ -49,7 +50,7 @@ server.start();
 // 	achievements.forEach((achievment)=>{
 // 		announcer.announceAchievment(p,achievment)
 // 	})
-	
+
 // })
 
 //console.log('Strating with CLI config',configFromCli);

@@ -3,7 +3,8 @@ export interface Config{
 	logLevel? : string,
 	showVersion? : boolean,
 	redisUrl? : string,
-	slackWebhookUrl? : string
+	slackWebhookUrl? : string,
+	adminToken? : string
 }
 
 
