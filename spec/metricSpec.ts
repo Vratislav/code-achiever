@@ -73,17 +73,41 @@ describe('Metrics from commit',()=>{
         expect(_.find(metricsInCommit,(m)=> m.id == Metrics.commitTimeMidnight.id)).toBeTruthy();
     });
 
-    it('Time::MidnighMetric - Should not awarded - too early', function(){
+    it('Time::MidnighMetric - Should not be awarded - too early', function(){
         commit.timestamp = "2017-01-09T22:59:01+01:00";
         let metricsInCommit = metricsFromCommit(commit);
         expect(_.find(metricsInCommit,(m)=> m.id == Metrics.commitTimeMidnight.id)).toBeFalsy();
     });
 
-    it('Time::MidnighMetric - Should not awarded - too late', function(){
+    it('Time::MidnighMetric - Should not be awarded - too late', function(){
         commit.timestamp = "2017-01-10T02:00:02+01:00";
         let metricsInCommit = metricsFromCommit(commit);
         expect(_.find(metricsInCommit,(m)=> m.id == Metrics.commitTimeMidnight.id)).toBeFalsy();
     });
 
+    it('CommitMessage::BugfixMetric - Should be awarded', function(){
+        commit.message = "Nasty bug fixed";
+        let metricsInCommit = metricsFromCommit(commit);
+        expect(_.find(metricsInCommit,(m)=> m.id == Metrics.bugfixCommitCountMetric.id)).toBeTruthy();
+    });
+
+    it('CommitMessage::BugfixMetric - Should not be awarded', function(){
+        commit.message = "Some wierd stuff in commit message";
+        let metricsInCommit = metricsFromCommit(commit);
+        expect(_.find(metricsInCommit,(m)=> m.id == Metrics.bugfixCommitCountMetric.id)).toBeFalsy();
+    });
+
+
+    it('CommitMessage::MergeBranchMetric - Should be awarded', function(){
+        commit.message = "Merge branch bla bla";
+        let metricsInCommit = metricsFromCommit(commit);
+        expect(_.find(metricsInCommit,(m)=> m.id == Metrics.branchMergeCountMetric.id)).toBeTruthy();
+    });
+
+    it('CommitMessage::MergeBranchMetric - Should not be awarded', function(){
+        commit.message = "Some wierd stuff in commit message";
+        let metricsInCommit = metricsFromCommit(commit);
+        expect(_.find(metricsInCommit,(m)=> m.id == Metrics.branchMergeCountMetric.id)).toBeFalsy();
+    });
 
 });

@@ -254,6 +254,59 @@ export class EarlyBirdAchievement extends GreaterThanAchievment{
 	}
 }
 
+export class BugSquisherAchievement extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "commit.bugfix.1";
+		this.name = "The Bug Squisher"
+		this.description = "You do not like bugs. You fix bugs. Life is nice."
+		this.metricId = Metrics.bugfixCommitCountMetric.id;
+		this.imageUrl = "http://www.thecomputeradvisor.net/gallery/how-to-fix-software-bugs/how_to_fix_software_bugs.jpg"
+		this.greaterThan = 0;
+		this.setup();
+	}
+}
+
+export class BugSquisherAchievement2 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "commit.bugfix.2";
+		this.name = "Bug Hunter"
+		this.description = "You find them and fix them. You are the hero our repository needs but does not deserve."
+		this.metricId = Metrics.bugfixCommitCountMetric.id;
+		this.imageUrl = "https://www.browserling.com/images/features/bug-hunter-cross-browser-testing.png"
+		this.greaterThan = 4;
+		this.setup();
+	}
+}
+
+export class BugSquisherAchievement3 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "commit.bugfix.3";
+		this.name = "Bug Exterminator"
+		this.description = "You are a bug killing machine. Nothing can stop you."
+		this.metricId = Metrics.bugfixCommitCountMetric.id;
+		this.imageUrl = "http://dustbusterslb.com/Home/wp-content/uploads/2015/11/big-guns-pest-control281301995.jpg"
+		this.greaterThan = 19;
+		this.setup();
+	}
+}
+
+
+export class BugSquisherAchievement4 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "commit.bugfix.4";
+		this.name = "Bug Killing Semi-god"
+		this.description = "You are the sentinel that protects our production from bugs. You are the guru of Bug crushing. "
+		this.metricId = Metrics.bugfixCommitCountMetric.id;
+		this.imageUrl = "http://powerlineinfo.com/wp-content/uploads/2013/08/pest-control-pest-exterminator.png"
+		this.greaterThan = 99;
+		this.setup();
+	}
+}
+
 
 export const allAchievements : Achievment[] = [
 	new FirstCommitAchievment(),
@@ -264,5 +317,9 @@ export const allAchievements : Achievment[] = [
 	new ForcePushAchievment2(),
 	new NightCoderAchievement(),
 	new MidnightCommitAchievement(),
-	new EarlyBirdAchievement()
+	new EarlyBirdAchievement(),
+	new BugSquisherAchievement(),
+	new BugSquisherAchievement2(),
+	new BugSquisherAchievement3(),
+	new BugSquisherAchievement4()
 ]

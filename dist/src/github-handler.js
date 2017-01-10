@@ -105,7 +105,7 @@ exports.metricsFromPush = (ghPush) => {
 exports.metricsFromCommit = (ghCommit) => {
     const metrics = [];
     metrics.push(Metrics.commitCountMetric);
-    let commitTime = moment(ghCommit.timestamp);
+    let commitTime = moment.parseZone(ghCommit.timestamp);
     let hours = commitTime.hours();
     if (hours >= 0 && hours <= 1) {
         metrics.push(Metrics.commitTimeMidnight);
@@ -115,6 +115,12 @@ exports.metricsFromCommit = (ghCommit) => {
     }
     if (hours >= 5 && hours < 9) {
         metrics.push(Metrics.commitTimeMorning);
+    }
+    if (/fix(ed| |$)/i.test(ghCommit.message)) {
+        metrics.push(Metrics.bugfixCommitCountMetric);
+    }
+    if (/^merge branch/i.test(ghCommit.message)) {
+        metrics.push(Metrics.branchMergeCountMetric);
     }
     return metrics;
 };

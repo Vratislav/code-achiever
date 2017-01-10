@@ -186,6 +186,12 @@ export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] 
 	if(hours >= 5 && hours < 9 ){
 		metrics.push(Metrics.commitTimeMorning);
 	}
+	if (/fix(ed| |$)/i.test(ghCommit.message)){
+		metrics.push(Metrics.bugfixCommitCountMetric);
+	}
+	if (/^merge branch/i.test(ghCommit.message)){
+		metrics.push(Metrics.branchMergeCountMetric);
+	}
 	return metrics;
 }
 

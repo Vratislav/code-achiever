@@ -64,6 +64,8 @@ export var forcePushCountMetric : SimpleMetric = {id:"force.push.count"}
 export var commitTimeMidnight : SimpleMetric = {id:"commit.time.midnight"}
 export var commitTimeNight : SimpleMetric = {id:"commit.time.night"}
 export var commitTimeMorning : SimpleMetric = {id:"commit.time.morning"}
+export var bugfixCommitCountMetric : SimpleMetric = {id:"commit.bugfix.count"}
+export var branchMergeCountMetric : SimpleMetric = {id:"branch.merge.count"}
 
 
 export var allMetrics = [
@@ -72,5 +74,7 @@ export var allMetrics = [
 	forcePushCountMetric,
 	commitTimeMidnight,
 	commitTimeNight,
-	commitTimeMorning
+	commitTimeMorning,
+	bugfixCommitCountMetric,
+	branchMergeCountMetric
 ]
