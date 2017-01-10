@@ -233,8 +233,8 @@ export class MidnightCommitAchievement extends GreaterThanAchievment{
 		super();
 		this.id = "commit.time.midnight";
 		this.name = "The Midnight commit"
-		this.description = "Code commited right after the day died has a magical power of going through CI 5% fatser."
-		this.metricId = Metrics.commitTimeNight.id;
+		this.description = "Code commited right after the day died has a magical power of going through CI 5% fatser!"
+		this.metricId = Metrics.commitTimeMidnight.id;
 		this.imageUrl = "http://maxpixel.freegreatpicture.com/static/photo/1x/Night-Midnight-Stars-Dark-Moon-Halloween-Sky-315204.jpg"
 		this.greaterThan = 0;
 		this.setup();
