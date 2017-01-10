@@ -169,11 +169,67 @@ class ForcePushAchievment extends GreaterThanAchievment {
     }
 }
 exports.ForcePushAchievment = ForcePushAchievment;
+class ForcePushAchievment2 extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "force.push.10";
+        this.name = "The force is strong with this one...";
+        this.description = "May the FORCE Push be with you! (Force push over 10 times.)";
+        this.metricId = Metrics.forcePushCountMetric.id;
+        this.imageUrl = "https://cdn.meme.am/instances/500x/59119268.jpg";
+        this.greaterThan = 9;
+        this.setup();
+    }
+}
+exports.ForcePushAchievment2 = ForcePushAchievment2;
+class NightCoderAchievement extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "commit.time.night";
+        this.name = "Late night coder";
+        this.description = "The best code is written during the night. (Commit during the night.)";
+        this.metricId = Metrics.commitTimeNight.id;
+        this.imageUrl = "https://d13yacurqjgara.cloudfront.net/users/416610/screenshots/2391640/tableillo_1x.png";
+        this.greaterThan = 0;
+        this.setup();
+    }
+}
+exports.NightCoderAchievement = NightCoderAchievement;
+class MidnightCommitAchievement extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "commit.time.midnight";
+        this.name = "The Midnight commit";
+        this.description = "Code commited right after the day died has a magical power of going through CI 5% fatser.";
+        this.metricId = Metrics.commitTimeNight.id;
+        this.imageUrl = "http://maxpixel.freegreatpicture.com/static/photo/1x/Night-Midnight-Stars-Dark-Moon-Halloween-Sky-315204.jpg";
+        this.greaterThan = 0;
+        this.setup();
+    }
+}
+exports.MidnightCommitAchievement = MidnightCommitAchievement;
+class EarlyBirdAchievement extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "commit.time.morning";
+        this.name = "The Early Bird";
+        this.description = "Get up early and get shit done. That's just how you roll!";
+        this.metricId = Metrics.commitTimeMorning.id;
+        this.imageUrl = "https://cdn.pixabay.com/photo/2013/07/13/13/42/tux-161439_1280.png";
+        this.greaterThan = 0;
+        this.setup();
+    }
+}
+exports.EarlyBirdAchievement = EarlyBirdAchievement;
 exports.allAchievements = [
     new FirstCommitAchievment(),
     new Commit10Achievment(),
     new Commit50Achievment(),
     new Commit100Achievment(),
-    new ForcePushAchievment()
+    new ForcePushAchievment(),
+    new ForcePushAchievment2(),
+    new NightCoderAchievement(),
+    new MidnightCommitAchievement(),
+    new EarlyBirdAchievement()
 ];
 //# sourceMappingURL=achievments.js.map

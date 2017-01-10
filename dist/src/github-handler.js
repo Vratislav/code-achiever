@@ -1,6 +1,7 @@
 "use strict";
 const Metrics = require("./metrics");
 const _ = require("underscore");
+const moment = require("moment");
 const Rx = require("rxjs");
 const utils_1 = require("./utils");
 class GithubHandler {
@@ -21,7 +22,7 @@ class GithubHandler {
             const pushStream = ghUserFromPush(pushEvent).flatMap(user => {
                 return playerFromGHUser(this.repo, user);
             }).map((player) => {
-                return { player: player, metrics: metricsFromPush(pushEvent) };
+                return { player: player, metrics: exports.metricsFromPush(pushEvent) };
             });
             const commitsStream = distinctCommitsFromPush(pushEvent)
                 .flatMap(commits => {
@@ -32,7 +33,7 @@ class GithubHandler {
                 console.log(commit);
                 return playerFromGHUser(this.repo, ghUserFromCommit(commit));
             });
-            const commitMetricsStram = commitsStream.map(metricsFromCommit);
+            const commitMetricsStram = commitsStream.map(exports.metricsFromCommit);
             const finalCommitMetricsStream = Rx.Observable.combineLatest(commitPlayersStream, commitMetricsStram)
                 .map((playerAndMetric) => {
                 return { player: playerAndMetric[0], metrics: playerAndMetric[1] };
@@ -93,7 +94,7 @@ const playerFromGHUser = (repo, ghUser) => {
     });
 };
 const distinctCommitsFromPush = (ghPush) => Rx.Observable.from([ghPush]).map((push) => push.commits.filter((c) => c.distinct));
-const metricsFromPush = (ghPush) => {
+exports.metricsFromPush = (ghPush) => {
     const metrics = [];
     metrics.push(Metrics.pushCountMetric);
     if (ghPush.forced) {
@@ -101,9 +102,20 @@ const metricsFromPush = (ghPush) => {
     }
     return metrics;
 };
-const metricsFromCommit = (ghCommit) => {
+exports.metricsFromCommit = (ghCommit) => {
     const metrics = [];
     metrics.push(Metrics.commitCountMetric);
+    let commitTime = moment(ghCommit.timestamp);
+    let hours = commitTime.hours();
+    if (hours >= 0 && hours <= 1) {
+        metrics.push(Metrics.commitTimeMidnight);
+    }
+    if (hours >= 20 && hours <= 24) {
+        metrics.push(Metrics.commitTimeNight);
+    }
+    if (hours >= 5 && hours < 9) {
+        metrics.push(Metrics.commitTimeMorning);
+    }
     return metrics;
 };
 const ghUserFromCommit = (ghCommit) => {

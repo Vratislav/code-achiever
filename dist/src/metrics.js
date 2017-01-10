@@ -39,9 +39,15 @@ exports.Metric = Metric;
 exports.commitCountMetric = { id: "commit.count" };
 exports.pushCountMetric = { id: "push.count" };
 exports.forcePushCountMetric = { id: "force.push.count" };
+exports.commitTimeMidnight = { id: "commit.time.midnight" };
+exports.commitTimeNight = { id: "commit.time.night" };
+exports.commitTimeMorning = { id: "commit.time.morning" };
 exports.allMetrics = [
     exports.commitCountMetric,
     exports.pushCountMetric,
-    exports.forcePushCountMetric
+    exports.forcePushCountMetric,
+    exports.commitTimeMidnight,
+    exports.commitTimeNight,
+    exports.commitTimeMorning
 ];
 //# sourceMappingURL=metrics.js.map

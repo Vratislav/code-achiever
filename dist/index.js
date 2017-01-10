@@ -23,7 +23,6 @@ if (config.showVersion) {
     console.log("v" + pjson.version);
     process.exit(0);
 }
-
 var repo = new repository_1.Repository(config.redisUrl);
 var achievmentManager = new Achievments.AchievmentManager();
 Metrics.allMetrics.forEach((m) => achievmentManager.registerSimpleMetric(m));
