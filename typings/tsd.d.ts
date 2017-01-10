@@ -1,7 +1,6 @@
 /// <reference path="colors/colors.d.ts" />
 /// <reference path="express/express.d.ts" />
 /// <reference path="glob/glob.d.ts" />
-/// <reference path="jasmine/jasmine.d.ts" />
 /// <reference path="mime/mime.d.ts" />
 /// <reference path="minimatch/minimatch.d.ts" />
 /// <reference path="node-uuid/node-uuid-base.d.ts" />

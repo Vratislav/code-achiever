@@ -2,6 +2,7 @@ import {Announcer} from './announcer'
 import * as Metrics from './metrics'
 import * as Achievments from './achievments'
 import _ = require('underscore')
+import moment = require('moment')
 import {Repository} from './repository'
 import {Player} from './player'
 import Rx = require('rxjs')
@@ -100,7 +101,7 @@ interface PlayerWithMetrics {
 	metrics : Metrics.SimpleMetric[]
 }
 
-interface GHPushEvent {
+export interface GHPushEvent {
 	sender : GHSender,
 	created : boolean,
 	deleted : boolean,
@@ -110,26 +111,27 @@ interface GHPushEvent {
 	pusher : MinimalGHUser
 }
 
-interface GHSender{
+export interface GHSender{
 	login : string
 }
 
-interface GHCommit{
+export interface GHCommit{
 	id : string,
 	message : string
 	added : string[],
 	removed : string[],
 	modified : string[],
+	timestamp : string,
 	distinct : true,
 	committer : GHUser
 }
 
-interface MinimalGHUser{
+export interface MinimalGHUser{
 	name : string;
 	email : string;
 }
 
-interface GHUser extends MinimalGHUser{
+export interface GHUser extends MinimalGHUser{
 	name : string;
 	email : string;
 	username : string;
@@ -160,7 +162,7 @@ const playerFromGHUser = (repo : Repository, ghUser : GHUser) : Rx.Observable<Pl
 const distinctCommitsFromPush = (ghPush : GHPushEvent) : Rx.Observable<GHCommit[]> =>
 Rx.Observable.from([ghPush]).map((push) => push.commits.filter((c) => c.distinct));
 
-const metricsFromPush = (ghPush : GHPushEvent) : Metrics.SimpleMetric[] => {
+export const metricsFromPush = (ghPush : GHPushEvent) : Metrics.SimpleMetric[] => {
 	const metrics : Metrics.SimpleMetric[] = [];
 	metrics.push(Metrics.pushCountMetric);
 
@@ -170,9 +172,22 @@ const metricsFromPush = (ghPush : GHPushEvent) : Metrics.SimpleMetric[] => {
 	return metrics;
 }
 
-const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] => {
+export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] => {
 	const metrics : Metrics.SimpleMetric[] = [];
 	metrics.push(Metrics.commitCountMetric);
+	let commitTime = moment(ghCommit.timestamp);
+	let hours = commitTime.hours();
+	if(hours >= 0 && hours <= 1){
+		metrics.push(Metrics.commitTimeMidnight);
+	}
+	if(hours >= 20 && hours <= 24){
+		metrics.push(Metrics.commitTimeNight);
+	}
+	if(hours >= 5 && hours < 9 ){
+		metrics.push(Metrics.commitTimeMorning);
+	}
+
+
 	return metrics;
 }
 
