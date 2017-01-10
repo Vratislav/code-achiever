@@ -186,8 +186,6 @@ export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] 
 	if(hours >= 5 && hours < 9 ){
 		metrics.push(Metrics.commitTimeMorning);
 	}
-
-
 	return metrics;
 }
 
