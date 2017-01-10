@@ -175,7 +175,7 @@ export const metricsFromPush = (ghPush : GHPushEvent) : Metrics.SimpleMetric[] =
 export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] => {
 	const metrics : Metrics.SimpleMetric[] = [];
 	metrics.push(Metrics.commitCountMetric);
-	let commitTime = moment(ghCommit.timestamp);
+	let commitTime = moment.parseZone(ghCommit.timestamp);
 	let hours = commitTime.hours();
 	if(hours >= 0 && hours <= 1){
 		metrics.push(Metrics.commitTimeMidnight);
