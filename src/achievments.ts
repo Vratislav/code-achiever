@@ -308,6 +308,33 @@ export class BugSquisherAchievement4 extends GreaterThanAchievment{
 }
 
 
+export class MergeBranchAchievement1 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "branch.merge.1";
+		this.name = "The merger!"
+		this.description = "You have just merged two branches of code together! Congratz!"
+		this.metricId = Metrics.branchMergeCountMetric.id;
+		this.imageUrl = "http://m.memegen.com/4ao283.jpg"
+		this.greaterThan = 0;
+		this.setup();
+	}
+}
+
+export class MergeBranchAchievement2 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "branch.merge.2";
+		this.name = "eMerging beast!"
+		this.description = "Merging is just your thing. You were born for it. (Merge over 10 branches.)"
+		this.metricId = Metrics.branchMergeCountMetric.id;
+		this.imageUrl = "http://weknowmemes.com/generator/uploads/generated/g1384940748876722625.jpg"
+		this.greaterThan = 10;
+		this.setup();
+	}
+}
+
+
 export const allAchievements : Achievment[] = [
 	new FirstCommitAchievment(),
 	new Commit10Achievment(),
@@ -321,5 +348,7 @@ export const allAchievements : Achievment[] = [
 	new BugSquisherAchievement(),
 	new BugSquisherAchievement2(),
 	new BugSquisherAchievement3(),
-	new BugSquisherAchievement4()
+	new BugSquisherAchievement4(),
+	new MergeBranchAchievement1(),
+	new MergeBranchAchievement2()
 ]
