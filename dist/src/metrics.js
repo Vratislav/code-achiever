@@ -46,6 +46,7 @@ exports.bugfixCommitCountMetric = { id: "commit.bugfix.count" };
 exports.branchMergeCountMetric = { id: "branch.merge.count" };
 exports.filesModifiedGemfile = { id: "files.modified.gemfile" };
 exports.filesModifiedNPM = { id: "files.modified.npm" };
+exports.filesModifiedDevOps = { id: "files.modified.devops" };
 exports.allMetrics = [
     exports.commitCountMetric,
     exports.pushCountMetric,
@@ -55,6 +56,8 @@ exports.allMetrics = [
     exports.commitTimeMorning,
     exports.bugfixCommitCountMetric,
     exports.branchMergeCountMetric,
-    exports.filesModifiedGemfile
+    exports.filesModifiedGemfile,
+    exports.filesModifiedNPM,
+    exports.filesModifiedDevOps
 ];
 //# sourceMappingURL=metrics.js.map

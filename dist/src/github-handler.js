@@ -128,6 +128,9 @@ exports.metricsFromCommit = (ghCommit) => {
     if (ghCommit.modified.some((f) => /package.json$/i.test(f))) {
         metrics.push(Metrics.filesModifiedNPM);
     }
+    if (ghCommit.modified.some((f) => /(dangerfile|fastfile|\.travis\.yml)$/i.test(f))) {
+        metrics.push(Metrics.filesModifiedDevOps);
+    }
     return metrics;
 };
 const ghUserFromCommit = (ghCommit) => {
