@@ -189,7 +189,7 @@ export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] 
 	if (/fix(ed| |$)/i.test(ghCommit.message)){
 		metrics.push(Metrics.bugfixCommitCountMetric);
 	}
-	if (/^merge branch/i.test(ghCommit.message)){
+	if (/^(merge branch|merge pull request)/i.test(ghCommit.message)){
 		metrics.push(Metrics.branchMergeCountMetric);
 	}
 	if (ghCommit.modified.some((f)=> /gemfile$/i.test(f))){
