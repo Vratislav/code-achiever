@@ -390,6 +390,86 @@ export class NPMAchievement2 extends GreaterThanAchievment{
 	}
 }
 
+export class RubyAchievement extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "ruby.1";
+		this.name = "The Ruby Novice"
+		this.description = "You tinker with ruby. Sometimes. (Modify .rb files in 10 commits)"
+		this.metricId = Metrics.filesModifiedRuby.id;
+		this.imageUrl = "https://images-na.ssl-images-amazon.com/images/I/51W-ycYHWNL._AC_UL320_SR254,320_.jpg"
+		this.greaterThan = 10;
+		this.setup();
+	}
+}
+
+export class RubyAchievement2 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "ruby.2";
+		this.name = "The Ruby Developer"
+		this.description = "You do ruby pretty often! (Modify .rb files in 100 commits)"
+		this.metricId = Metrics.filesModifiedRuby.id;
+		this.imageUrl = "http://skillhot.com/wp-content/uploads/2016/02/The-Complete-Ruby-Developer-A-guide-to-going-from-Zero-to-Ruby-developer.jpg"
+		this.greaterThan = 100;
+		this.setup();
+	}
+}
+
+export class RubyAchievement3 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "ruby.3";
+		this.name = "The Ruby Ninja"
+		this.description = "You move in the shadows, you only leave a trace of well-written ruby code. (Modify .rb files in 250 commits)"
+		this.metricId = Metrics.filesModifiedRuby.id;
+		this.imageUrl = "https://www.drupal.org/files/user-pictures/picture-3007075-1470027662.gif"
+		this.greaterThan = 250;
+		this.setup();
+	}
+}
+
+export class RubyAchievement4 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "ruby.4";
+		this.name = "The Ruby Warrior"
+		this.description = "With IRB sword in hand and specs as your shield, you tackle any challenge. Nothing can defeat you.  (Modify .rb files in 500 commits)"
+		this.metricId = Metrics.filesModifiedRuby.id;
+		this.imageUrl = "https://cdn3.bloc.io/assets/ruby_warrior/spartacus-b2f5da3d2243ee3faffa0b30a0f733b0.png"
+		this.greaterThan = 500;
+		this.setup();
+	}
+}
+
+export class RubyAchievement5 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "ruby.5";
+		this.name = "The Ruby Mage"
+		this.description = "You know the sacred ruby incantations. Those famous one-liners of yours saved your team countless of times. (Modify .rb files in 1000 commits!)"
+		this.metricId = Metrics.filesModifiedRuby.id;
+		this.imageUrl = "http://www.finalfantasyd20.com/ffd20/images/RedMage_by_FantasyAce.jpg"
+		this.greaterThan = 1000;
+		this.setup();
+	}
+}
+
+
+export class RubyAchievement6 extends GreaterThanAchievment{
+	constructor(){
+		super();
+		this.id = "ruby.6";
+		this.name = "The Master of Ruby ZEN"
+		this.description = "There is peace in your soul. You have reached the enlightement."
+		this.metricId = Metrics.filesModifiedRuby.id;
+		this.imageUrl = "https://s-media-cache-ak0.pinimg.com/originals/d1/4b/66/d14b66a060ed807e25d2ec1bc55e6545.jpg"
+		this.greaterThan = 1000;
+		this.setup();
+	}
+}
+
+
 export const allAchievements : Achievment[] = [
 	new FirstCommitAchievment(),
 	new Commit10Achievment(),
@@ -409,5 +489,11 @@ export const allAchievements : Achievment[] = [
 	new GemMasterAchievement1(),
 	new GemMasterAchievement2(),
 	new NPMAchievement(),
-	new NPMAchievement2()
+	new NPMAchievement2(),
+	new RubyAchievement(),
+	new RubyAchievement2(),
+	new RubyAchievement3(),
+	new RubyAchievement4(),
+	new RubyAchievement5(),
+	new RubyAchievement6(),
 ]

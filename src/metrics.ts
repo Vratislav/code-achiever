@@ -69,6 +69,9 @@ export var branchMergeCountMetric : SimpleMetric = {id:"branch.merge.count"}
 export var filesModifiedGemfile : SimpleMetric = {id:"files.modified.gemfile"}
 export var filesModifiedNPM : SimpleMetric = {id:"files.modified.npm"}
 export var filesModifiedDevOps : SimpleMetric = {id: "files.modified.devops"}
+export var filesModifiedRuby : SimpleMetric = {id: "files.modified.ruby"}
+export var filesModifiedJavascript : SimpleMetric = {id: "files.modified.javascript"}
+export var filesModifiedTypescript : SimpleMetric = {id: "files.modified.typescript"}
 
 export var allMetrics = [
 	commitCountMetric,
@@ -81,5 +84,8 @@ export var allMetrics = [
 	branchMergeCountMetric,
 	filesModifiedGemfile,
 	filesModifiedNPM,
-	filesModifiedDevOps
+	filesModifiedDevOps,
+	filesModifiedRuby,
+	filesModifiedJavascript,
+	filesModifiedTypescript
 ]

@@ -47,6 +47,9 @@ exports.branchMergeCountMetric = { id: "branch.merge.count" };
 exports.filesModifiedGemfile = { id: "files.modified.gemfile" };
 exports.filesModifiedNPM = { id: "files.modified.npm" };
 exports.filesModifiedDevOps = { id: "files.modified.devops" };
+exports.filesModifiedRuby = { id: "files.modified.ruby" };
+exports.filesModifiedJavascript = { id: "files.modified.javascript" };
+exports.filesModifiedTypescript = { id: "files.modified.typescript" };
 exports.allMetrics = [
     exports.commitCountMetric,
     exports.pushCountMetric,
@@ -58,6 +61,9 @@ exports.allMetrics = [
     exports.branchMergeCountMetric,
     exports.filesModifiedGemfile,
     exports.filesModifiedNPM,
-    exports.filesModifiedDevOps
+    exports.filesModifiedDevOps,
+    exports.filesModifiedRuby,
+    exports.filesModifiedJavascript,
+    exports.filesModifiedTypescript
 ];
 //# sourceMappingURL=metrics.js.map

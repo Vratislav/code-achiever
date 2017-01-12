@@ -195,8 +195,20 @@ export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] 
 	if (ghCommit.modified.some((f)=> /gemfile$/i.test(f))){
 		metrics.push(Metrics.filesModifiedGemfile);
 	}
-	if (ghCommit.modified.some((f)=> /package.json$/i.test(f))){
+	if (ghCommit.modified.some((f)=> /package\.json$/i.test(f))){
 		metrics.push(Metrics.filesModifiedNPM);
+	}
+	if (ghCommit.modified.some((f)=> /\.rb$/i.test(f))){
+		metrics.push(Metrics.filesModifiedRuby);
+	}
+	if (ghCommit.modified.some((f)=> /\.rb$/i.test(f))){
+		metrics.push(Metrics.filesModifiedRuby);
+	}
+	if (ghCommit.modified.some((f)=> /\.js$/i.test(f))){
+		metrics.push(Metrics.filesModifiedJavascript);
+	}
+	if (ghCommit.modified.some((f)=> /\.ts$/i.test(f))){
+		metrics.push(Metrics.filesModifiedTypescript);
 	}
 	if (ghCommit.modified.some((f)=> /(dangerfile|fastfile|\.travis\.yml)$/i.test(f))){
 		metrics.push(Metrics.filesModifiedDevOps);
