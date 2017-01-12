@@ -192,6 +192,12 @@ export const metricsFromCommit = (ghCommit : GHCommit) : Metrics.SimpleMetric[] 
 	if (/^merge branch/i.test(ghCommit.message)){
 		metrics.push(Metrics.branchMergeCountMetric);
 	}
+	if (ghCommit.modified.some((f)=> /gemfile$/i.test(f))){
+		metrics.push(Metrics.filesModifiedGemfile);
+	}
+	if (ghCommit.modified.some((f)=> /package.json$/i.test(f))){
+		metrics.push(Metrics.filesModifiedNPM);
+	}
 	return metrics;
 }
 

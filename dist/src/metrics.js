@@ -44,6 +44,8 @@ exports.commitTimeNight = { id: "commit.time.night" };
 exports.commitTimeMorning = { id: "commit.time.morning" };
 exports.bugfixCommitCountMetric = { id: "commit.bugfix.count" };
 exports.branchMergeCountMetric = { id: "branch.merge.count" };
+exports.filesModifiedGemfile = { id: "files.modified.gemfile" };
+exports.filesModifiedNPM = { id: "files.modified.npm" };
 exports.allMetrics = [
     exports.commitCountMetric,
     exports.pushCountMetric,
@@ -52,6 +54,7 @@ exports.allMetrics = [
     exports.commitTimeNight,
     exports.commitTimeMorning,
     exports.bugfixCommitCountMetric,
-    exports.branchMergeCountMetric
+    exports.branchMergeCountMetric,
+    exports.filesModifiedGemfile
 ];
 //# sourceMappingURL=metrics.js.map

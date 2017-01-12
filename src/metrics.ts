@@ -66,6 +66,8 @@ export var commitTimeNight : SimpleMetric = {id:"commit.time.night"}
 export var commitTimeMorning : SimpleMetric = {id:"commit.time.morning"}
 export var bugfixCommitCountMetric : SimpleMetric = {id:"commit.bugfix.count"}
 export var branchMergeCountMetric : SimpleMetric = {id:"branch.merge.count"}
+export var filesModifiedGemfile : SimpleMetric = {id:"files.modified.gemfile"}
+export var filesModifiedNPM : SimpleMetric = {id:"files.modified.npm"}
 
 
 export var allMetrics = [
@@ -76,5 +78,6 @@ export var allMetrics = [
 	commitTimeNight,
 	commitTimeMorning,
 	bugfixCommitCountMetric,
-	branchMergeCountMetric
+	branchMergeCountMetric,
+	filesModifiedGemfile
 ]

@@ -88,5 +88,15 @@ describe('Metrics from commit', () => {
         let metricsInCommit = github_handler_1.metricsFromCommit(commit);
         expect(_.find(metricsInCommit, (m) => m.id == Metrics.branchMergeCountMetric.id)).toBeFalsy();
     });
+    it('FilesModified::Gemfile - Should be awarded', function () {
+        commit.modified.push("/app/some/path/gemfile");
+        let metricsInCommit = github_handler_1.metricsFromCommit(commit);
+        expect(_.find(metricsInCommit, (m) => m.id == Metrics.filesModifiedGemfile.id)).toBeTruthy();
+    });
+    it('FilesModified::PackageJSON - Should be awarded', function () {
+        commit.modified.push("/app/some/path/package.JSON");
+        let metricsInCommit = github_handler_1.metricsFromCommit(commit);
+        expect(_.find(metricsInCommit, (m) => m.id == Metrics.filesModifiedNPM.id)).toBeTruthy();
+    });
 });
 //# sourceMappingURL=metricSpec.js.map

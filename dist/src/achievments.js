@@ -299,6 +299,46 @@ class MergeBranchAchievement2 extends GreaterThanAchievment {
     }
 }
 exports.MergeBranchAchievement2 = MergeBranchAchievement2;
+//
+class GemMasterAchievement1 extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "ruby.gemmaster.1";
+        this.name = "Gem Apprentice";
+        this.description = "You can appreciate a good gem and you know how to use them for the good of your team.";
+        this.metricId = Metrics.filesModifiedGemfile.id;
+        this.imageUrl = "http://data-creative.info/assets/img/posts/rubygems_logo_red.png";
+        this.greaterThan = 0;
+        this.setup();
+    }
+}
+exports.GemMasterAchievement1 = GemMasterAchievement1;
+class GemMasterAchievement2 extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "ruby.gemmaster.2";
+        this.name = "Gem Master";
+        this.description = "If there is gem for it, you will find it. And you will USE IT! (modify gemfile over 10 times)";
+        this.metricId = Metrics.filesModifiedGemfile.id;
+        this.imageUrl = "https://stormpath.com/wp-content/uploads/2016/04/preview_COLOURBOX4628597.jpg";
+        this.greaterThan = 10;
+        this.setup();
+    }
+}
+exports.GemMasterAchievement2 = GemMasterAchievement2;
+class NPMAchievement extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "js.npm.1";
+        this.name = "The Package Manager";
+        this.description = "You have packages for everything and NPM is your friend. (You have a wet dreams about Yarn though every now and then.)";
+        this.metricId = Metrics.filesModifiedNPM.id;
+        this.imageUrl = "http://68.media.tumblr.com/1e63026e4211a6e7711fe95d5ff6b13e/tumblr_inline_nn489p271Z1t68bpr_500.png";
+        this.greaterThan = 0;
+        this.setup();
+    }
+}
+exports.NPMAchievement = NPMAchievement;
 exports.allAchievements = [
     new FirstCommitAchievment(),
     new Commit10Achievment(),
@@ -314,6 +354,9 @@ exports.allAchievements = [
     new BugSquisherAchievement3(),
     new BugSquisherAchievement4(),
     new MergeBranchAchievement1(),
-    new MergeBranchAchievement2()
+    new MergeBranchAchievement2(),
+    new GemMasterAchievement1(),
+    new GemMasterAchievement2(),
+    new NPMAchievement()
 ];
 //# sourceMappingURL=achievments.js.map

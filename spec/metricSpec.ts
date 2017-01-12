@@ -110,4 +110,16 @@ describe('Metrics from commit',()=>{
         expect(_.find(metricsInCommit,(m)=> m.id == Metrics.branchMergeCountMetric.id)).toBeFalsy();
     });
 
+    it('FilesModified::Gemfile - Should be awarded', function(){
+        commit.modified.push("/app/some/path/gemfile");
+        let metricsInCommit = metricsFromCommit(commit);
+        expect(_.find(metricsInCommit,(m)=> m.id == Metrics.filesModifiedGemfile.id)).toBeTruthy();
+    });
+
+    it('FilesModified::PackageJSON - Should be awarded', function(){
+        commit.modified.push("/app/some/path/package.JSON");
+        let metricsInCommit = metricsFromCommit(commit);
+        expect(_.find(metricsInCommit,(m)=> m.id == Metrics.filesModifiedNPM.id)).toBeTruthy();
+    });
+
 });
