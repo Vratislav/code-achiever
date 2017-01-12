@@ -339,6 +339,19 @@ class NPMAchievement extends GreaterThanAchievment {
     }
 }
 exports.NPMAchievement = NPMAchievement;
+class NPMAchievement2 extends GreaterThanAchievment {
+    constructor() {
+        super();
+        this.id = "js.npm.2";
+        this.name = "The Node Package Crew";
+        this.description = "You really know your way around packages. 9 out of 10 NPM wombats would vote for you in the upcomming presidential election.";
+        this.metricId = Metrics.filesModifiedNPM.id;
+        this.imageUrl = "https://pbs.twimg.com/media/CTFdOYHVAAA3DFU.png";
+        this.greaterThan = 10;
+        this.setup();
+    }
+}
+exports.NPMAchievement2 = NPMAchievement2;
 exports.allAchievements = [
     new FirstCommitAchievment(),
     new Commit10Achievment(),
@@ -357,6 +370,7 @@ exports.allAchievements = [
     new MergeBranchAchievement2(),
     new GemMasterAchievement1(),
     new GemMasterAchievement2(),
-    new NPMAchievement()
+    new NPMAchievement(),
+    new NPMAchievement2()
 ];
 //# sourceMappingURL=achievments.js.map
