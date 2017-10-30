@@ -1,7 +1,7 @@
 {
   "name": "code-achiever",
   "version": "0.3.2",
-  "description": "SDK Integration Testing server",
+  "description": "Code achiever",
   "main": "./dist/index.js",
   "bin": "./bin/judge",
   "preferGlobal": true,
@@ -12,15 +12,11 @@
     "dist": "npm run clean && tsc && node ./tooling/copy.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Ceskasporiteln/judge.git"
+    "type": "git"
   },
   "author": "Vratislav Kalenda",
   "private": true,
-  "bugs": {
-    "url": "https://github.com/Ceskasporiteln/judge/issues"
-  },
-  "homepage": "https://github.com/Ceskasporiteln/judge#readme",
+  "homepage": "https://github.com/Vratislav/code-achiever",
   "devDependencies": {
     "jasmine": "^2.5.2",
     "shelljs": "^0.5.3",
